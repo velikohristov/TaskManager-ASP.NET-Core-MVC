@@ -1,0 +1,44 @@
+@model Поправителен_изпит.Models.TaskItem
+
+@{
+    ViewData["Title"] = "Изтриване на задача";
+}
+
+<h1>Изтриване на задача</h1>
+
+<h3>Сигурен ли си, че искаш да изтриеш тази задача?</h3>
+
+<div>
+    <h4>Детайли за задачата</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">Заглавие</dt>
+        <dd class="col-sm-9">@Model.Title</dd>
+
+        <dt class="col-sm-3">Описание</dt>
+        <dd class="col-sm-9">@Model.Description</dd>
+
+        <dt class="col-sm-3">Състояние</dt>
+        <dd class="col-sm-9">@(Model.IsCompleted ? "Завършена" : "В процес")</dd>
+
+        <dt class="col-sm-3">Създадена на</dt>
+        <dd class="col-sm-9">@Model.CreatedOn.ToString("dd.MM.yyyy HH:mm")</dd>
+
+        <dt class="col-sm-3">Крайна дата</dt>
+        <dd class="col-sm-9">@(Model.DueDate?.ToString("dd.MM.yyyy HH:mm") ?? "—")</dd>
+
+        <dt class="col-sm-3">Категория</dt>
+        <dd class="col-sm-9">@(Model.Category?.Name ?? "—")</dd>
+
+        <dt class="col-sm-3">Приоритет</dt>
+        <dd class="col-sm-9">@(Model.Priority?.Name ?? "—")</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Изтрий</button>
+        |
+        <a asp-action="Index">Обратно към списъка</a>
+    </form>
+</div>
